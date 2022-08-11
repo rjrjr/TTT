@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,20 +28,29 @@ class MainActivity : ComponentActivity() {
     setContent {
       TTTTheme {
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          Counter(models)
+          Root(models)
         }
       }
     }
   }
 
   class Continuity : ViewModel() {
-    private val randomService = RandomService()
     private val scope = viewModelScope + Main
     val models = scope.launchMolecule(clock = RecompositionClock.ContextClock) {
-      // IRL probably wouldn't instantiate a new presenter on each call like this,
-      // but want to be sure doing so works.
-      val cp: Presenter<CounterModel> = CounterPresenter(randomService)
-      cp.present()
+      RootPresenter().present()
     }
   }
+}
+
+class RootPresenter : Presenter<RootModel> {
+  // Should RootPresenter be hoisted to a higher Composable that invokes Dagger
+  // to create it? Would put Compose in charge of _all_ state.
+
+  private val randomService = RandomService()
+  private val counterPresenter = CounterPresenter(randomService)
+
+  @Composable override fun present(): RootModel = Pair(
+    counterPresenter.present(),
+    TicTacToePresenter.present()
+  )
 }
