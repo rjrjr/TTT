@@ -1,4 +1,4 @@
-package rjrjr.com.ttt
+package rjrjr.com.ttt.presenter
 
 typealias TicTacToeBoard = List<List<Player?>>
 
@@ -56,6 +56,11 @@ fun TicTacToeBoard.hasVictory(): Boolean {
     )
 
   return done
+}
+
+fun TicTacToeBoard.isFull(): Boolean {
+  asSequence().flatMap { asSequence().flatMap { it } }.forEach { if (it == null) return false }
+  return true
 }
 
 fun TicTacToeBoard.takeSquare(
