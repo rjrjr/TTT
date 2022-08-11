@@ -3,41 +3,41 @@ package rjrjr.com.ttt
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.cash.molecule.AndroidUiDispatcher.Companion.Main
+import app.cash.molecule.RecompositionClock
+import app.cash.molecule.launchMolecule
+import kotlinx.coroutines.plus
 import rjrjr.com.ttt.ui.theme.TTTTheme
 
 class MainActivity : ComponentActivity() {
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
+    val continuity: Continuity by viewModels()
+    val models = continuity.models
+
     setContent {
       TTTTheme {
-        // A surface container using the 'background' color from the theme
         Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-          Greeting("Android")
+          Counter(models)
         }
       }
     }
   }
-}
 
-@Composable
-fun Greeting(name: String) {
-  Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-  TTTTheme {
-    Greeting("Android")
+  class Continuity : ViewModel() {
+    private val randomService = RandomService()
+    private val scope = viewModelScope + Main
+    val models = scope.launchMolecule(clock = RecompositionClock.ContextClock) {
+      counterPresenter(randomService)
+    }
   }
 }
