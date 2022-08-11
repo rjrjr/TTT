@@ -37,7 +37,10 @@ class MainActivity : ComponentActivity() {
     private val randomService = RandomService()
     private val scope = viewModelScope + Main
     val models = scope.launchMolecule(clock = RecompositionClock.ContextClock) {
-      counterPresenter(randomService)
+      // IRL probably wouldn't instantiate a new presenter on each call like this,
+      // but want to be sure doing so works.
+      val cp: Presenter<CounterModel> = CounterPresenter(randomService)
+      cp.present()
     }
   }
 }

@@ -8,13 +8,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
 
-// Compare with the Molecule sample, which passes a Flow<Event> as
-// an arg to the presenter function, instead of these lambdas. Note that we're abandoning all
-// the benefits of a shared event stream -- aka the action sink in workflow
-// Does that matter, if you don't particularly want the time machine demo? It comes with the
-// huge downside of making nested presenters much more complicated.
-// https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
-
+/**
+ * Compare with the
+ * [Molecule sample](https://github.com/cashapp/molecule/blob/0.4.0/sample/src/main/java/com/example/molecule/presenter.kt#L32),
+ * which passes a `Flow<Event>` as an arg to the presenter function,
+ * instead of hanging event handler lambdas off the model. Note that we're abandoning all the
+ * benefits of a shared event stream -- `ActionSink` in workflow, `callbackFlow` in Molecule .
+ *
+ * Does that matter, if you don't particularly want the time machine demo? That approach comes
+ * with the huge downside of making nested presenters much more complicated.
+ *
+ * https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
+ */
 data class CounterModel(
   val value: Int,
   val loading: Boolean,
@@ -22,8 +27,14 @@ data class CounterModel(
   val onRandomize: () -> Unit
 )
 
+class CounterPresenter(
+  private val randomService: RandomService,
+) : Presenter<CounterModel> {
+  @Composable override fun present(): CounterModel = counterPresenter(randomService)
+}
+
 @Composable
-fun counterPresenter(
+private fun counterPresenter(
   randomService: RandomService,
 ): CounterModel {
   var count by remember { mutableStateOf(0) }
