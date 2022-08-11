@@ -8,6 +8,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
 import rjrjr.com.ttt.Presenter
+import rjrjr.com.ttt.ScreenModel
 import rjrjr.com.ttt.data.RandomService
 
 /**
@@ -38,37 +39,32 @@ import rjrjr.com.ttt.data.RandomService
  *
  * https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
  */
-data class CounterModel(
+data class CounterScreenModel(
   val value: Int,
   val loading: Boolean,
   val onChange: (delta: Int) -> Unit,
   val onRandomize: () -> Unit
-)
+): ScreenModel
 
-class CounterPresenter(
+class CounterScreenPresenter(
   private val randomService: RandomService,
-) : Presenter<CounterModel> {
-  @Composable override fun present(): CounterModel = counterPresenter(randomService)
-}
+) : Presenter<CounterScreenModel> {
+  @Composable override fun present(): CounterScreenModel {
+    var count by remember { mutableStateOf(0) }
+    var loading by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
-@Composable
-private fun counterPresenter(
-  randomService: RandomService,
-): CounterModel {
-  var count by remember { mutableStateOf(0) }
-  var loading by remember { mutableStateOf(false) }
-  val scope = rememberCoroutineScope()
-
-  return CounterModel(
-    count,
-    loading,
-    onChange = { count += it },
-    onRandomize = {
-      loading = true
-      scope.launch {
-        count = randomService.get(-20, 20)
-        loading = false
+    return CounterScreenModel(
+      count,
+      loading,
+      onChange = { count += it },
+      onRandomize = {
+        loading = true
+        scope.launch {
+          count = randomService.get(-20, 20)
+          loading = false
+        }
       }
-    }
-  )
+    )
+  }
 }

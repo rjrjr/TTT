@@ -6,12 +6,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import rjrjr.com.ttt.presenter.EMPTY_BOARD
-import rjrjr.com.ttt.presenter.TicTacToeModel
+import rjrjr.com.ttt.presenter.TicTacToeScreenModel
 import rjrjr.com.ttt.presenter.hasVictory
 import rjrjr.com.ttt.presenter.isFull
 
 @Composable
-fun TicTacToeScreen(model: TicTacToeModel) {
+fun TicTacToeScreen(model: TicTacToeScreenModel) {
   Column {
     for (row in 0..2) {
       Row {

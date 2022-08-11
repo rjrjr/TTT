@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import rjrjr.com.ttt.presenter.CounterModel
+import rjrjr.com.ttt.presenter.CounterScreenModel
 
 @Composable
-fun CounterScreen(model: CounterModel) {
+fun CounterScreen(model: CounterScreenModel) {
   Column {
     Text(
       if (model.loading) "…rolling the dice…" else "The count is ${model.value}"

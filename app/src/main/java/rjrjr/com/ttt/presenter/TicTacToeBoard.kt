@@ -63,6 +63,10 @@ fun TicTacToeBoard.isFull(): Boolean {
   return true
 }
 
+fun TicTacToeBoard.isGameOver(): Boolean {
+  return isFull() || hasVictory()
+}
+
 fun TicTacToeBoard.takeSquare(
   row: Int,
   col: Int,
