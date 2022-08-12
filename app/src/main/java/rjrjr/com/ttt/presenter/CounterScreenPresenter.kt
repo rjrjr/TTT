@@ -1,6 +1,7 @@
 package rjrjr.com.ttt.presenter
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -39,6 +40,7 @@ import rjrjr.com.ttt.data.RandomService
  *
  * https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
  */
+@Immutable
 data class CounterScreenModel(
   val value: Int,
   val loading: Boolean,

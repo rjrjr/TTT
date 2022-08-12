@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +16,7 @@ import rjrjr.com.ttt.ScreenModel
 /**
  * Displays a pair of [ScreenModel]s side by side in landscape, or stacked in portrait.
  */
+@Immutable
 data class SplitScreenModel(
   val firstScreen: ScreenModel,
   val secondScreen: ScreenModel

@@ -1,6 +1,7 @@
 package rjrjr.com.ttt.presenter
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -9,6 +10,7 @@ import rjrjr.com.ttt.Presenter
 import rjrjr.com.ttt.ScreenModel
 import rjrjr.com.ttt.presenter.Player.X
 
+@Immutable
 data class TicTacToeScreenModel(
   val playing: Player,
   val board: TicTacToeBoard,
