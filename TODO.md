@@ -4,8 +4,9 @@
 * ~Fake DI~
 * ~Model > Composable binding (Screen interface and ComposeLocal binding map?)~
 * ~Opaque presenter composition~
-* BackStack
-* Dialog / overlay
 * Transitions
-* Real DI
-* View state persistence for BackStack
+* BackStack
+* Less likely
+  * Dialog / overlay
+  * Real DI
+  * View state persistence for BackStack
