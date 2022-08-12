@@ -6,6 +6,7 @@
 * ~Opaque presenter composition~
 * Transitions
 * BackStack
+* Update and publish [`compose-backstack`](https://github.com/rjrjr/compose-backstack)
 * Less likely
   * Dialog / overlay
   * Real DI
