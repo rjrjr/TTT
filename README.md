@@ -1,6 +1,6 @@
 # What's all this then?
 
-[I'm](https://github.com/rjrjr) working on my droidcon NYC 2022 talk, _Navigation and Dependency Injection in Compose_, and this is the scratch project to check that my ideas actually, like, work.
+[I'm](https://nyc.droidcon.com/ray-ryan/) working on my droidcon NYC 2022 talk, _Navigation and Dependency Injection in Compose_, and this is the scratch project to check that my ideas actually, like, work.
 
 So far it's about:
 
