@@ -4,7 +4,10 @@
 
 tl;dr:
 
-A tree of `@Composable` presenter functions is run by a **non-UI** Compose runtime (courtesy of [Molecule](https://github.com/cashapp/molecule)) builds a complete struct-like view model, itself a tree of smaller view model structs. That is passed to a top level Compose UI  `@Composable` function, which is able to map sub-view model structs to other `@Composables` via `ScreenRegistry.Content`.
+* A tree of `@Composable` presenter functions is run by a **non-UI** Compose runtime (courtesy of [Molecule](https://github.com/cashapp/molecule))
+* They build a complete struct-like view model, itself a tree of smaller view model structs. 
+* That is passed to a top level Compose UI  `@Composable` function, 
+* which is able to map sub-view model structs to other `@Composables` via `ScreenRegistry.Content`.
 
 So far it's about:
 
