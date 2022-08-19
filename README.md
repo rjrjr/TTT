@@ -2,6 +2,10 @@
 
 [I'm](https://nyc.droidcon.com/ray-ryan/) working on my droidcon NYC 2022 talk, _Navigation and Dependency Injection in Compose_, and this is the scratch project to check that my ideas actually, like, work.
 
+tl;dr:
+
+A tree of `@Composable` presenter functions is run by a **non-UI** Compose runtime (courtesy of [Molecule](https://github.com/cashapp/molecule)) builds a complete struct-like view model, itself a tree of smaller view model structs. That is passed to a top level Compose UI  `@Composable` function, which is able to map sub-view model structs to other `@Composables` via `ScreenRegistry.Content`.
+
 So far it's about:
 
 - A clean pattern for creating presenters (aka [workflows](https://square.github.io/workflow/glossary/#workflow-instance), if you're familiar with [Square Workflow](https://square.github.io/workflow/)) via DI -- Molelcule examples offer no guidance there, Presenter interface is my own
