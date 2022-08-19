@@ -4,7 +4,7 @@
 
 tl;dr:
 
-[Here's the interesting code](tree/main/app/src/main/java/rjrjr/com/ttt).
+[Here's the interesting code](../../tree/main/app/src/main/java/rjrjr/com/ttt).
 
 * A tree of `@Composable` presenter functions is run by a **non-UI** Compose runtime (courtesy of [Molecule](https://github.com/cashapp/molecule))
 * They build a complete struct-like view model, itself a tree of smaller view model structs. 
