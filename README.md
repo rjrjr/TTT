@@ -25,6 +25,6 @@ The upside of this approach is that it's really, really simple. There are two co
 
 - If a new presenter takes over a view structure built by a previous one, recomposition will happen. Cash imagines caring about that scenario some day
 
-I think we should be able to have our cake (workflow style self contained view models) and eat it too (central event dispatch) without making feature developers pay too high a price. But I wonder if it would actually worth bothering, even in a large app. [Martin Fowler has opinions](https://martinfowler.com/eaaDev/EventSourcing.html#:~:text=Event%20Sourcing.-,When%20to%20Use%20It,-Packaging%20up%20every). Probably yes, so it's worth exploring how to get that w/o burdening feature developers. Dunno if time permits before the talk, though.
+I think we should be able to have our cake (workflow style self contained view models) and eat it too (central event dispatch) without making feature developers pay too high a price. But I wonder if it would actually worth bothering, even in a large app. [Martin Fowler has opinions](https://martinfowler.com/eaaDev/EventSourcing.html#:~:text=Event%20Sourcing.-,When%20to%20Use%20It,-Packaging%20up%20every). Probably yes, so it's worth exploring how to get that. Dunno if time permits before the talk, though.
 
 Next step, proper navigation.
