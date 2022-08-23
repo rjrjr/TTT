@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.presenter
+package rjrjr.com.ttt.counter
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -7,9 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
-import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.UiModel
-import rjrjr.com.ttt.data.RandomService
+import rjrjr.com.ttt.framework.Presenter
+import rjrjr.com.ttt.framework.UiModel
 
 /**
  * Compare with the

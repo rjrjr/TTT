@@ -1,10 +1,7 @@
-package rjrjr.com.ttt.view
+package rjrjr.com.ttt.framework
 
 import androidx.compose.runtime.Composable
 import com.zachklipp.compose.backstack.Backstack
-import rjrjr.com.ttt.ComposeUiModel
-import rjrjr.com.ttt.LocalUiContentRegistry
-import rjrjr.com.ttt.UiModel
 
 data class BackstackUi(
   val bottom: UiModelAndKey,

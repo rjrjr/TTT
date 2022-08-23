@@ -1,6 +1,6 @@
-package rjrjr.com.ttt.poetry
+package rjrjr.com.ttt.poetry.poetrydata
 
-class Poem(
+data class Poem(
   val title: String,
   val poet: Poet,
   val stanzas: List<List<String>>
@@ -9,14 +9,5 @@ class Poem(
 
   override fun toString(): String {
     return "Poem($title)"
-  }
-
-  companion object {
-    val allPoems: List<Poem> = listOf(
-      TheConquerorWorm,
-      ToHelen,
-      Raven,
-      TheTyger
-    )
   }
 }

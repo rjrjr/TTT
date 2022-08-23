@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.presenter
+package rjrjr.com.ttt.tictactoe
 
 typealias TicTacToeBoard = List<List<Player?>>
 

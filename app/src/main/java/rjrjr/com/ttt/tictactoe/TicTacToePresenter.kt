@@ -1,13 +1,13 @@
-package rjrjr.com.ttt.presenter
+package rjrjr.com.ttt.tictactoe
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.UiModel
-import rjrjr.com.ttt.presenter.Player.X
+import rjrjr.com.ttt.framework.Presenter
+import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.tictactoe.Player.X
 
 data class TicTacToeUi(
   val playing: Player,

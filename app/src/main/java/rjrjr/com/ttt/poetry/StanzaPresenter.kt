@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.presenter
+package rjrjr.com.ttt.poetry
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -6,14 +6,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.UiModel
-import rjrjr.com.ttt.poetry.Poem
-import rjrjr.com.ttt.poetry.PoemService
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ClosePoem
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowNextStanza
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowPreviousStanza
-import rjrjr.com.ttt.presenter.StanzaPresenter.Props
+import rjrjr.com.ttt.framework.Presenter
+import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ClosePoem
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowNextStanza
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowPreviousStanza
+import rjrjr.com.ttt.poetry.StanzaPresenter.Props
+import rjrjr.com.ttt.poetry.poetrydata.Poem
+import rjrjr.com.ttt.poetry.poetrydata.PoemService
 
 sealed class StanzaUi : UiModel
 

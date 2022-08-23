@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.poetry
+package rjrjr.com.ttt.poetry.poetrydata
 
 val TheTyger = Poem(
   title = "The Tyger",

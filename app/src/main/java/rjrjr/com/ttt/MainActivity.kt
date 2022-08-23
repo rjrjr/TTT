@@ -20,13 +20,16 @@ import app.cash.molecule.RecompositionClock
 import app.cash.molecule.launchMolecule
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.plus
-import rjrjr.com.ttt.UiContentRegistry.Binding
-import rjrjr.com.ttt.presenter.CounterUi
-import rjrjr.com.ttt.presenter.TicTacToeUi
+import rjrjr.com.ttt.counter.CounterUi
+import rjrjr.com.ttt.counter.CounterView
+import rjrjr.com.ttt.framework.LocalUiContentRegistry
+import rjrjr.com.ttt.framework.UiContentRegistry
+import rjrjr.com.ttt.framework.UiContentRegistry.Binding
+import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.poetry.STANZA_BINDINGS
+import rjrjr.com.ttt.tictactoe.TicTacToeUi
+import rjrjr.com.ttt.tictactoe.TicTacToeView
 import rjrjr.com.ttt.ui.theme.TTTTheme
-import rjrjr.com.ttt.view.CounterView
-import rjrjr.com.ttt.view.STANZA_BINDINGS
-import rjrjr.com.ttt.view.TicTacToeView
 
 class MainActivity : ComponentActivity() {
 

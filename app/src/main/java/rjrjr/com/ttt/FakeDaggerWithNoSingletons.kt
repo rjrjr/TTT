@@ -5,14 +5,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import rjrjr.com.ttt.data.RandomService
-import rjrjr.com.ttt.poetry.PoemService
-import rjrjr.com.ttt.presenter.CounterPresenter
-import rjrjr.com.ttt.presenter.StanzaPresenter
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ClosePoem
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowNextStanza
-import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowPreviousStanza
-import rjrjr.com.ttt.presenter.TicTacToePresenter
+import rjrjr.com.ttt.counter.CounterPresenter
+import rjrjr.com.ttt.counter.RandomService
+import rjrjr.com.ttt.framework.Presenter
+import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.poetry.StanzaPresenter
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ClosePoem
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowNextStanza
+import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowPreviousStanza
+import rjrjr.com.ttt.poetry.poetrydata.PoemService
+import rjrjr.com.ttt.tictactoe.TicTacToePresenter
 
 class FakeDaggerWithNoSingletons {
   private fun randomService() = RandomService()

@@ -1,11 +1,10 @@
-package rjrjr.com.ttt.view
+package rjrjr.com.ttt.counter
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import rjrjr.com.ttt.presenter.CounterUi
 
 @Composable
 fun CounterView(model: CounterUi) {

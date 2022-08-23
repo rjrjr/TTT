@@ -1,14 +1,10 @@
-package rjrjr.com.ttt.view
+package rjrjr.com.ttt.tictactoe
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import rjrjr.com.ttt.presenter.EMPTY_BOARD
-import rjrjr.com.ttt.presenter.TicTacToeUi
-import rjrjr.com.ttt.presenter.hasVictory
-import rjrjr.com.ttt.presenter.isFull
 
 @Composable
 fun TicTacToeView(model: TicTacToeUi) {

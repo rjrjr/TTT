@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.view
+package rjrjr.com.ttt.poetry
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
@@ -8,9 +8,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import rjrjr.com.ttt.UiContentRegistry.Binding
-import rjrjr.com.ttt.presenter.LoadingStanza
-import rjrjr.com.ttt.presenter.ShowingStanza
+import rjrjr.com.ttt.framework.UiContentRegistry.Binding
 
 val STANZA_BINDINGS = listOf(
   Binding(LoadingStanza::class) {

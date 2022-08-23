@@ -1,4 +1,4 @@
-package rjrjr.com.ttt.view
+package rjrjr.com.ttt.framework
 
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -8,9 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import rjrjr.com.ttt.ComposeUiModel
-import rjrjr.com.ttt.LocalUiContentRegistry
-import rjrjr.com.ttt.UiModel
 
 /**
  * Displays a pair of [UiModel]s side by side in landscape, or stacked in portrait.

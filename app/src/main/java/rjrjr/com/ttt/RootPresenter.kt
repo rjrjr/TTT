@@ -1,9 +1,12 @@
-package rjrjr.com.ttt.presenter
+package rjrjr.com.ttt
 
 import androidx.compose.runtime.Composable
-import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.UiModel
-import rjrjr.com.ttt.view.SplitUi
+import rjrjr.com.ttt.counter.CounterPresenter
+import rjrjr.com.ttt.framework.Presenter
+import rjrjr.com.ttt.framework.SplitUi
+import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.tictactoe.TicTacToePresenter
+
 
 class RootPresenter(
   private val counterPresenter: CounterPresenter,
@@ -11,6 +14,6 @@ class RootPresenter(
 ) : Presenter<Unit, UiModel> {
   @Composable override fun present(props: Unit): UiModel = SplitUi(
     counterPresenter.present(Unit),
-    ticTacToePresenter.present(Unit)
+    TicTacToePresenter.present(Unit)
   )
 }
