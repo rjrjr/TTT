@@ -4,30 +4,28 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import rjrjr.com.ttt.ComposeUiScreenModel
-import rjrjr.com.ttt.LocalScreenRegistry
-import rjrjr.com.ttt.ScreenModel
+import rjrjr.com.ttt.ComposeUiModel
+import rjrjr.com.ttt.LocalUiContentRegistry
+import rjrjr.com.ttt.UiModel
 
 /**
- * Displays a pair of [ScreenModel]s side by side in landscape, or stacked in portrait.
+ * Displays a pair of [UiModel]s side by side in landscape, or stacked in portrait.
  */
-@Immutable
-data class SplitScreenModel(
-  val firstScreen: ScreenModel,
-  val secondScreen: ScreenModel
-) : ComposeUiScreenModel {
+data class SplitModel(
+  val firstView: UiModel,
+  val secondView: UiModel
+) : ComposeUiModel {
   @Composable override fun Content() {
     SplitScreen(this)
   }
 }
 
 @Composable
-private fun SplitScreen(model: SplitScreenModel) {
+private fun SplitScreen(model: SplitModel) {
   BoxWithConstraints {
     val landscapeNow = maxWidth > maxHeight
     var landscape by remember { mutableStateOf(landscapeNow) }
@@ -42,9 +40,9 @@ private fun SplitScreen(model: SplitScreenModel) {
 }
 
 @Composable
-private fun SplitScreenBody(model: SplitScreenModel) {
-  val screener = LocalScreenRegistry.current
+private fun SplitScreenBody(model: SplitModel) {
+  val screener = LocalUiContentRegistry.current
 
-  screener.ContentFor(model.firstScreen)
-  screener.ContentFor(model.secondScreen)
+  screener.ContentFor(model.firstView)
+  screener.ContentFor(model.secondView)
 }

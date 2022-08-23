@@ -18,8 +18,8 @@ import androidx.compose.runtime.Composable
  * via [remember][androidx.compose.runtime.remember],
  * [mutableStateOf][androidx.compose.runtime.mutableStateOf], etc.
  */
-fun interface Presenter<out ModelT> {
+fun interface Presenter<in PropsT, out ModelT> {
   // It's unfortunate that implementers can't be forced to remember to include @Composable.
   // Is there a better way?
-  @Composable fun present(): ModelT
+  @Composable fun present(props: PropsT): ModelT
 }

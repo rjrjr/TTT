@@ -1,7 +1,6 @@
 package rjrjr.com.ttt.presenter
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -9,7 +8,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.launch
 import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.ScreenModel
+import rjrjr.com.ttt.UiModel
 import rjrjr.com.ttt.data.RandomService
 
 /**
@@ -40,23 +39,22 @@ import rjrjr.com.ttt.data.RandomService
  *
  * https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
  */
-@Immutable
-data class CounterScreenModel(
+data class CounterModel(
   val value: Int,
   val loading: Boolean,
   val onChange: (delta: Int) -> Unit,
   val onRandomize: () -> Unit
-): ScreenModel
+) : UiModel
 
-class CounterScreenPresenter(
+class CounterPresenter(
   private val randomService: RandomService,
-) : Presenter<CounterScreenModel> {
-  @Composable override fun present(): CounterScreenModel {
+) : Presenter<Unit, CounterModel> {
+  @Composable override fun present(props: Unit): CounterModel {
     var count by remember { mutableStateOf(0) }
     var loading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
-    return CounterScreenModel(
+    return CounterModel(
       count,
       loading,
       onChange = { count += it },

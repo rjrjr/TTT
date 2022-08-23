@@ -20,12 +20,14 @@ import app.cash.molecule.RecompositionClock
 import app.cash.molecule.launchMolecule
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.plus
-import rjrjr.com.ttt.ScreenRegistry.Binding
-import rjrjr.com.ttt.presenter.CounterScreenModel
-import rjrjr.com.ttt.presenter.TicTacToeScreenModel
+import rjrjr.com.ttt.UiContentRegistry.Binding
+import rjrjr.com.ttt.presenter.CounterModel
+import rjrjr.com.ttt.presenter.StanzaModel
+import rjrjr.com.ttt.presenter.TicTacToeModel
 import rjrjr.com.ttt.ui.theme.TTTTheme
-import rjrjr.com.ttt.view.CounterScreen
-import rjrjr.com.ttt.view.TicTacToeScreen
+import rjrjr.com.ttt.view.CounterView
+import rjrjr.com.ttt.view.STANZA_BINDINGS
+import rjrjr.com.ttt.view.TicTacToeView
 
 class MainActivity : ComponentActivity() {
 
@@ -42,21 +44,21 @@ class MainActivity : ComponentActivity() {
     private val scope = viewModelScope + Main
     val models = scope.launchMolecule(clock = RecompositionClock.ContextClock) {
       val rootPresenter = remember { FakeDaggerWithNoSingletons().rootPresenter() }
-      rootPresenter.present()
+      rootPresenter.present(Unit)
     }
   }
 }
 
 @Composable
-fun AppUi(roots: StateFlow<ScreenModel>) {
+fun AppUi(roots: StateFlow<UiModel>) {
   val root by roots.collectAsState()
 
   CompositionLocalProvider(
-    LocalScreenRegistry provides ScreenRegistry(
+    LocalUiContentRegistry provides UiContentRegistry(
       listOf(
-        Binding(CounterScreenModel::class) { CounterScreen(it) },
-        Binding(TicTacToeScreenModel::class) { TicTacToeScreen(it) }
-      )
+        Binding(CounterModel::class) { CounterView(it) },
+        Binding(TicTacToeModel::class) { TicTacToeView(it) },
+      ) + STANZA_BINDINGS
     )
   ) {
     TTTTheme {
@@ -64,7 +66,7 @@ fun AppUi(roots: StateFlow<ScreenModel>) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
       ) {
-        LocalScreenRegistry.current.ContentFor(root)
+        LocalUiContentRegistry.current.ContentFor(root)
       }
     }
   }

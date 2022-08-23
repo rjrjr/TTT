@@ -7,9 +7,9 @@ tl;dr:
 [Here's the interesting code](../../tree/main/app/src/main/java/rjrjr/com/ttt).
 
 * A tree of `@Composable` presenter functions is run by a **non-UI** Compose runtime (courtesy of [Molecule](https://github.com/cashapp/molecule))
-* They build a complete struct-like view model, itself a tree of smaller view model structs. 
+* They build a complete struct-like `UiModel`, itself a tree of smaller `UiModel` structs. 
 * That is passed to a top level Compose UI  `@Composable` function, 
-* which is able to map sub-view model structs to other `@Composables` via `ScreenRegistry.Content`.
+* which is able to map sub-view model structs to other `@Composables` via `UiContentRegistry.Content`.
 
 So far it's about:
 

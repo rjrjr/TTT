@@ -2,15 +2,15 @@ package rjrjr.com.ttt.presenter
 
 import androidx.compose.runtime.Composable
 import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.ScreenModel
-import rjrjr.com.ttt.view.SplitScreenModel
+import rjrjr.com.ttt.UiModel
+import rjrjr.com.ttt.view.SplitModel
 
 class RootPresenter(
-  private val counterScreenPresenter: CounterScreenPresenter,
+  private val counterPresenter: CounterPresenter,
   private val ticTacToePresenter: TicTacToePresenter
-) : Presenter<ScreenModel> {
-  @Composable override fun present(): ScreenModel = SplitScreenModel(
-    counterScreenPresenter.present(),
-    ticTacToePresenter.present()
+) : Presenter<Unit, UiModel> {
+  @Composable override fun present(props: Unit): UiModel = SplitModel(
+    counterPresenter.present(Unit),
+    ticTacToePresenter.present(Unit)
   )
 }

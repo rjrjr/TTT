@@ -1,34 +1,32 @@
 package rjrjr.com.ttt.presenter
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import rjrjr.com.ttt.Presenter
-import rjrjr.com.ttt.ScreenModel
+import rjrjr.com.ttt.UiModel
 import rjrjr.com.ttt.presenter.Player.X
 
-@Immutable
-data class TicTacToeScreenModel(
+data class TicTacToeModel(
   val playing: Player,
   val board: TicTacToeBoard,
   val onTakeSquare: (row: Int, col: Int) -> Unit,
   val onReset: () -> Unit
-) : ScreenModel
+) : UiModel
 
-object TicTacToePresenter : Presenter<TicTacToeScreenModel> {
+object TicTacToePresenter : Presenter<Unit, TicTacToeModel> {
   @Composable
-  override fun present(): TicTacToeScreenModel {
+  override fun present(props: Unit): TicTacToeModel {
     var board: TicTacToeBoard by remember { mutableStateOf(EMPTY_BOARD) }
     var playing by remember { mutableStateOf(X) }
 
-    return TicTacToeScreenModel(
+    return TicTacToeModel(
       playing,
       board,
       onTakeSquare = { r, c ->
-        if (board.isGameOver()) return@TicTacToeScreenModel
+        if (board.isGameOver()) return@TicTacToeModel
 
         board = board.takeSquare(r, c, playing)
         if (!board.isGameOver()) playing = playing.other

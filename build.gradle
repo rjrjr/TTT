@@ -4,6 +4,7 @@ buildscript {
   }
   repositories {
     mavenCentral()
+    mavenLocal()
   }
   dependencies {
     classpath 'app.cash.molecule:molecule-gradle-plugin:0.3.0'
