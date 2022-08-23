@@ -21,6 +21,7 @@ object LoadingStanza : StanzaModel()
 
 data class ShowingStanza(
   val title: String,
+  val poet: String,
   val stanzaNumber: Int,
   val lines: List<String>,
   val onGoUp: () -> Unit,
@@ -57,6 +58,7 @@ class StanzaPresenter(
     return if (loading) LoadingStanza else poemOrNull!!.let { poem ->
       ShowingStanza(
         title = poem.title,
+        poet = poem.poet.fullName,
         stanzaNumber = props.stanzaIndex + 1,
         lines = poem.stanzas[props.stanzaIndex],
         onGoUp = { props.onOutput(ClosePoem) },
