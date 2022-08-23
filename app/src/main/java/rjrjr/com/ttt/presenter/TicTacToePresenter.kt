@@ -9,24 +9,24 @@ import rjrjr.com.ttt.Presenter
 import rjrjr.com.ttt.UiModel
 import rjrjr.com.ttt.presenter.Player.X
 
-data class TicTacToeModel(
+data class TicTacToeUi(
   val playing: Player,
   val board: TicTacToeBoard,
   val onTakeSquare: (row: Int, col: Int) -> Unit,
   val onReset: () -> Unit
 ) : UiModel
 
-object TicTacToePresenter : Presenter<Unit, TicTacToeModel> {
+object TicTacToePresenter : Presenter<Unit, TicTacToeUi> {
   @Composable
-  override fun present(props: Unit): TicTacToeModel {
+  override fun present(props: Unit): TicTacToeUi {
     var board: TicTacToeBoard by remember { mutableStateOf(EMPTY_BOARD) }
     var playing by remember { mutableStateOf(X) }
 
-    return TicTacToeModel(
+    return TicTacToeUi(
       playing,
       board,
       onTakeSquare = { r, c ->
-        if (board.isGameOver()) return@TicTacToeModel
+        if (board.isGameOver()) return@TicTacToeUi
 
         board = board.takeSquare(r, c, playing)
         if (!board.isGameOver()) playing = playing.other

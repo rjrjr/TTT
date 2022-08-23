@@ -21,9 +21,8 @@ import app.cash.molecule.launchMolecule
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.plus
 import rjrjr.com.ttt.UiContentRegistry.Binding
-import rjrjr.com.ttt.presenter.CounterModel
-import rjrjr.com.ttt.presenter.StanzaModel
-import rjrjr.com.ttt.presenter.TicTacToeModel
+import rjrjr.com.ttt.presenter.CounterUi
+import rjrjr.com.ttt.presenter.TicTacToeUi
 import rjrjr.com.ttt.ui.theme.TTTTheme
 import rjrjr.com.ttt.view.CounterView
 import rjrjr.com.ttt.view.STANZA_BINDINGS
@@ -56,8 +55,8 @@ fun AppUi(roots: StateFlow<UiModel>) {
   CompositionLocalProvider(
     LocalUiContentRegistry provides UiContentRegistry(
       listOf(
-        Binding(CounterModel::class) { CounterView(it) },
-        Binding(TicTacToeModel::class) { TicTacToeView(it) },
+        Binding(CounterUi::class) { CounterView(it) },
+        Binding(TicTacToeUi::class) { TicTacToeView(it) },
       ) + STANZA_BINDINGS
     )
   ) {

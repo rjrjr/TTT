@@ -6,7 +6,7 @@ import rjrjr.com.ttt.ComposeUiModel
 import rjrjr.com.ttt.LocalUiContentRegistry
 import rjrjr.com.ttt.UiModel
 
-data class BackstackModel(
+data class BackstackUi(
   val bottom: UiModelAndKey,
   val rest: List<UiModelAndKey>
 ) : ComposeUiModel {
@@ -40,6 +40,6 @@ data class UiModelAndKey(
 }
 
 @Composable
-private fun BackstackView(model: BackstackModel) {
+private fun BackstackView(model: BackstackUi) {
   Backstack(model.frames) { LocalUiContentRegistry.current.ContentFor(it.uiModel) }
 }

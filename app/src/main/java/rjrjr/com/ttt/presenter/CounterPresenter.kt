@@ -39,7 +39,7 @@ import rjrjr.com.ttt.data.RandomService
  *
  * https://androidstudygroup.slack.com/archives/C04QK68FW/p1660162198681359
  */
-data class CounterModel(
+data class CounterUi(
   val value: Int,
   val loading: Boolean,
   val onChange: (delta: Int) -> Unit,
@@ -48,13 +48,13 @@ data class CounterModel(
 
 class CounterPresenter(
   private val randomService: RandomService,
-) : Presenter<Unit, CounterModel> {
-  @Composable override fun present(props: Unit): CounterModel {
+) : Presenter<Unit, CounterUi> {
+  @Composable override fun present(props: Unit): CounterUi {
     var count by remember { mutableStateOf(0) }
     var loading by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
 
-    return CounterModel(
+    return CounterUi(
       count,
       loading,
       onChange = { count += it },

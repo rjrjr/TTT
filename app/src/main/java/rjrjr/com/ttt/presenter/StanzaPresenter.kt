@@ -15,9 +15,9 @@ import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowNextStanza
 import rjrjr.com.ttt.presenter.StanzaPresenter.Output.ShowPreviousStanza
 import rjrjr.com.ttt.presenter.StanzaPresenter.Props
 
-sealed class StanzaModel : UiModel
+sealed class StanzaUi : UiModel
 
-object LoadingStanza : StanzaModel()
+object LoadingStanza : StanzaUi()
 
 data class ShowingStanza(
   val title: String,
@@ -27,11 +27,11 @@ data class ShowingStanza(
   val onGoUp: () -> Unit,
   val onGoBack: (() -> Unit)? = null,
   val onGoForth: (() -> Unit)? = null
-) : StanzaModel()
+) : StanzaUi()
 
 class StanzaPresenter(
   private val service: PoemService
-) : Presenter<Props, StanzaModel> {
+) : Presenter<Props, StanzaUi> {
 
   data class Props(
     val poemId: Int,
@@ -45,7 +45,7 @@ class StanzaPresenter(
     ShowNextStanza
   }
 
-  @Composable override fun present(props: Props): StanzaModel {
+  @Composable override fun present(props: Props): StanzaUi {
     var loading by remember { mutableStateOf(true) }
     var poemOrNull: Poem? by remember { mutableStateOf(null) }
 

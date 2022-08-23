@@ -7,7 +7,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontStyle.Companion
 import androidx.compose.ui.text.font.FontWeight
 import rjrjr.com.ttt.UiContentRegistry.Binding
 import rjrjr.com.ttt.presenter.LoadingStanza

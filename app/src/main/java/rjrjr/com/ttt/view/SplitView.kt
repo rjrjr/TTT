@@ -15,32 +15,32 @@ import rjrjr.com.ttt.UiModel
 /**
  * Displays a pair of [UiModel]s side by side in landscape, or stacked in portrait.
  */
-data class SplitModel(
+data class SplitUi(
   val firstView: UiModel,
   val secondView: UiModel
 ) : ComposeUiModel {
   @Composable override fun Content() {
-    SplitScreen(this)
+    SplitView(this)
   }
 }
 
 @Composable
-private fun SplitScreen(model: SplitModel) {
+private fun SplitView(model: SplitUi) {
   BoxWithConstraints {
     val landscapeNow = maxWidth > maxHeight
     var landscape by remember { mutableStateOf(landscapeNow) }
     landscape = landscapeNow
 
     if (landscape) {
-      Row { SplitScreenBody(model) }
+      Row { SplitViewBody(model) }
     } else {
-      Column { SplitScreenBody(model) }
+      Column { SplitViewBody(model) }
     }
   }
 }
 
 @Composable
-private fun SplitScreenBody(model: SplitModel) {
+private fun SplitViewBody(model: SplitUi) {
   val screener = LocalUiContentRegistry.current
 
   screener.ContentFor(model.firstView)
