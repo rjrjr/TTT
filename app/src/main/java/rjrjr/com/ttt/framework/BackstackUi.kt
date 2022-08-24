@@ -4,15 +4,18 @@ import androidx.compose.runtime.Composable
 import com.zachklipp.compose.backstack.Backstack
 
 data class BackstackUi<U : UiModel>(
-  val bottom: UiAndKey<U>,
-  val rest: List<UiAndKey<U>>
+  val previous: List<UiAndKey<U>> = emptyList(),
+  val top: UiAndKey<U>
 ) : ComposeUiModel {
   constructor(
     bottom: U,
-    vararg rest: U
-  ) : this(UiAndKey(bottom), rest.toList().map { UiAndKey(it) })
+    vararg more: U
+  ) : this(
+    previous = (listOf(bottom) + more.toList()).subList(0, more.size).map { UiAndKey(it) },
+    top = more.lastOrNull()?.let { UiAndKey(it) } ?: UiAndKey(bottom)
+  )
 
-  val frames: List<UiAndKey<U>> = listOf(bottom) + rest
+  val frames: List<UiAndKey<U>> = previous + top
 
   @Composable override fun Content() {
     BackstackView(this)
@@ -20,7 +23,7 @@ data class BackstackUi<U : UiModel>(
 
   operator fun plus(other: BackstackUi<U>?): BackstackUi<U> {
     return if (other == null) this
-    else BackstackUi(frames[0], frames.subList(1, frames.size) + other.frames)
+    else BackstackUi(previous + top + other.previous, other.top)
   }
 }
 
@@ -58,7 +61,7 @@ fun <U : UiModel> List<U>.toBackstack(
 ): BackstackUi<U> {
   require(isNotEmpty())
   return BackstackUi(
-    bottom = first().let { UiAndKey(it, getKey(0, it)) },
-    rest = subList(1, size).mapIndexed { i, u -> UiAndKey(u, getKey(i + 1, u)) }
+    previous = subList(0, size - 1).mapIndexed { i, u -> UiAndKey(u, getKey(i, u)) },
+    top = last().let { UiAndKey(it, getKey(size - 1, it)) }
   )
 }
