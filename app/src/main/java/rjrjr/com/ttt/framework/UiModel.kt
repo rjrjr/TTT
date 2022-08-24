@@ -1,7 +1,6 @@
 package rjrjr.com.ttt.framework
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 
 /**
  * Marker interface for models that can be mapped to Compose UI content
@@ -17,5 +16,3 @@ interface UiModel
 interface ComposeUiModel : UiModel {
   @Composable fun Content()
 }
-
-val LocalUiContentRegistry = compositionLocalOf { UiContentRegistry() }

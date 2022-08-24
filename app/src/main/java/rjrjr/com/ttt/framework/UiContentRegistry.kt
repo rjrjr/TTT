@@ -3,6 +3,7 @@ package rjrjr.com.ttt.framework
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import kotlin.reflect.KClass
 
@@ -45,4 +46,13 @@ class UiContentRegistry(private val bindings: List<Binding<*>> = emptyList()) {
     other === this || ((other as? UiContentRegistry)?.bindings == bindings)
 
   override fun hashCode(): Int = bindings.hashCode()
+}
+
+val LocalUiContentRegistry = compositionLocalOf { UiContentRegistry() }
+
+@Composable fun ShowUi(
+  uiModel: UiModel,
+  modifier: Modifier = Modifier
+) {
+  LocalUiContentRegistry.current.ContentFor(uiModel, modifier)
 }

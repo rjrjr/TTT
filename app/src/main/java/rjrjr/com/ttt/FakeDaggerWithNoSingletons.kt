@@ -9,6 +9,7 @@ import rjrjr.com.ttt.counter.CounterPresenter
 import rjrjr.com.ttt.counter.RandomService
 import rjrjr.com.ttt.framework.Presenter
 import rjrjr.com.ttt.framework.UiModel
+import rjrjr.com.ttt.poetry.PoemPresenter
 import rjrjr.com.ttt.poetry.StanzaPresenter
 import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ClosePoem
 import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowNextStanza
@@ -25,7 +26,9 @@ class FakeDaggerWithNoSingletons {
 
   private fun ticTacToePresenter() = TicTacToePresenter
 
-  private fun stanzaPresenter() = StanzaPresenter(poemService())
+  private fun stanzaPresenter() = StanzaPresenter
+
+  private fun poemPresenter() = PoemPresenter(poemService(), stanzaPresenter())
 
   fun rootPresenter(): Presenter<Unit, UiModel> {
     // return RootPresenter(
@@ -34,20 +37,10 @@ class FakeDaggerWithNoSingletons {
     // )
 
     return object : Presenter<Unit, UiModel> {
-      val stanzaPresenter = stanzaPresenter()
+      val poemPresenter = poemPresenter()
 
       @Composable override fun present(props: Unit): UiModel {
-        var stanza by remember { mutableStateOf(0) }
-
-        return stanzaPresenter.present(
-          StanzaPresenter.Props(poemId = 0, stanzaIndex = stanza) {
-            when (it) {
-              ClosePoem -> {}
-              ShowPreviousStanza -> stanza--
-              ShowNextStanza -> stanza++
-            }
-          }
-        )
+        return poemPresenter.present(PoemPresenter.Props(poemId = 2))
       }
     }
   }

@@ -5,7 +5,10 @@ data class Poem(
   val poet: Poet,
   val stanzas: List<List<String>>
 ) {
-  val initialStanzas = stanzas.map { lines -> lines[0].trim() }
+  /** The first line of each stanza. */
+  val firstLines: List<String> by lazy {
+    stanzas.map { lines -> lines[0].trim() }
+  }
 
   override fun toString(): String {
     return "Poem($title)"
