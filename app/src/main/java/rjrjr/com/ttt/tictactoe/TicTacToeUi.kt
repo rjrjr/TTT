@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun TicTacToeView(model: TicTacToeUi) {
+fun TicTacToe(model: TicTacToeUi) {
   Column {
     for (row in 0..2) {
       Row {

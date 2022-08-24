@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun CounterView(model: CounterUi) {
+fun Counter(model: CounterUi) {
   Column {
     Text(
       if (model.loading) "…rolling the dice…" else "The count is ${model.value}"

@@ -12,11 +12,11 @@ import rjrjr.com.ttt.framework.UiContentRegistry.Binding
 
 val STANZA_BINDINGS = listOf(
   Binding(StanzaUi::class) { stanza ->
-    StanzaView(stanza)
+    Stanza(stanza)
   }
 )
 
-@Composable private fun StanzaView(stanza: StanzaUi) {
+@Composable private fun Stanza(stanza: StanzaUi) {
   Column {
     Row { Text(text = stanza.title, fontWeight = FontWeight.ExtraBold) }
     Row { Text(text = stanza.poet, fontStyle = FontStyle.Italic) }

@@ -43,7 +43,7 @@ data class UiAndKey<U : UiModel>(
 
 @Composable
 private fun BackstackView(model: BackstackUi<*>) {
-  Backstack(model.frames) { LocalUiContentRegistry.current.ContentFor(it.ui) }
+  Backstack(model.frames) { ShowUi(it.ui) }
 }
 
 fun <U : UiModel> List<U>.toBackstackOrNull(
@@ -59,6 +59,6 @@ fun <U : UiModel> List<U>.toBackstack(
   require(isNotEmpty())
   return BackstackUi(
     bottom = first().let { UiAndKey(it, getKey(0, it)) },
-    rest = subList(1, size).mapIndexed { i, u -> UiAndKey(u, getKey(i, u)) }
+    rest = subList(1, size).mapIndexed { i, u -> UiAndKey(u, getKey(i + 1, u)) }
   )
 }
