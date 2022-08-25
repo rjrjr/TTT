@@ -10,7 +10,7 @@ import rjrjr.com.ttt.framework.BackstackUi
 import rjrjr.com.ttt.framework.IndexDetailUi
 import rjrjr.com.ttt.framework.LoadingUi
 import rjrjr.com.ttt.framework.Presenter
-import rjrjr.com.ttt.framework.UiAndKey
+import rjrjr.com.ttt.framework.SimpleSelectListUi
 import rjrjr.com.ttt.framework.UiModel
 import rjrjr.com.ttt.framework.toBackstack
 import rjrjr.com.ttt.poetry.PoemPresenter.Props
@@ -52,7 +52,11 @@ class PoemPresenter(
       }
 
       IndexDetailUi(
-        index = BackstackUi(LoadingUi),
+        index = BackstackUi(
+          SimpleSelectListUi(poem.firstLines, showingStanza) {
+            showingStanza = it
+          }
+        ),
         detail = stanzaUis.toBackstack { i, _ -> "$i" }
       )
     }
