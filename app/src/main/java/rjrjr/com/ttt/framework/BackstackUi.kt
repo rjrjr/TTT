@@ -15,10 +15,16 @@ data class BackstackUi<U : UiModel>(
     top = more.lastOrNull()?.let { UiAndKey(it) } ?: UiAndKey(bottom)
   )
 
-  val frames: List<UiAndKey<U>> = previous + top
+  private val frames by lazy {
+    (previous + top)
+  }
 
   @Composable override fun Content() {
-    BackstackView(this)
+    val map = frames.associate { it.key to it.ui }
+
+    Backstack(
+      map.keys.toList()
+    ) { key -> ShowUi(map.getValue(key)) }
   }
 
   operator fun plus(other: BackstackUi<U>?): BackstackUi<U> {
@@ -27,10 +33,12 @@ data class BackstackUi<U : UiModel>(
   }
 }
 
-data class UiAndKey<U : UiModel>(
+class UiAndKey<U : UiModel>(
   val ui: U,
-  val key: String = keyFor(ui)
+  name: String = ""
 ) {
+  val key = keyFor(ui, name)
+
   override fun equals(other: Any?): Boolean {
     return other is UiAndKey<*> && other.key == key
   }
@@ -40,13 +48,10 @@ data class UiAndKey<U : UiModel>(
   }
 
   companion object {
-    fun keyFor(screen: UiModel): String = screen::class.qualifiedName!!
+    fun keyFor(screen: UiModel, name: String): String =
+      screen::class.qualifiedName!! +
+        (name.takeUnless { it.isBlank() }?.let { "($it)" } ?: "")
   }
-}
-
-@Composable
-private fun BackstackView(model: BackstackUi<*>) {
-  Backstack(model.frames) { ShowUi(it.ui) }
 }
 
 fun <U : UiModel> List<U>.toBackstackOrNull(
@@ -59,7 +64,9 @@ fun <U : UiModel> List<U>.toBackstackOrNull(
 fun <U : UiModel> List<U>.toBackstack(
   getKey: (Int, U) -> String = { _, _ -> "" }
 ): BackstackUi<U> {
-  require(isNotEmpty())
+  require(isNotEmpty()) {
+    "Cannot build a backstack from an empty list!"
+  }
   return BackstackUi(
     previous = subList(0, size - 1).mapIndexed { i, u -> UiAndKey(u, getKey(i, u)) },
     top = last().let { UiAndKey(it, getKey(size - 1, it)) }

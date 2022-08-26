@@ -7,12 +7,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import rjrjr.com.ttt.framework.BackstackUi
-import rjrjr.com.ttt.framework.IndexDetailUi
+import rjrjr.com.ttt.framework.ListDetailUi
 import rjrjr.com.ttt.framework.LoadingUi
 import rjrjr.com.ttt.framework.Presenter
 import rjrjr.com.ttt.framework.SimpleSelectListUi
 import rjrjr.com.ttt.framework.UiModel
-import rjrjr.com.ttt.framework.toBackstack
+import rjrjr.com.ttt.framework.toBackstackOrNull
 import rjrjr.com.ttt.poetry.PoemPresenter.Props
 import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ClosePoem
 import rjrjr.com.ttt.poetry.StanzaPresenter.Output.ShowNextStanza
@@ -32,7 +32,7 @@ class PoemPresenter(
   @Composable override fun present(props: Props): UiModel {
     var loading by remember { mutableStateOf(true) }
     var poemOrNull: Poem? by remember { mutableStateOf(null) }
-    var showingStanza by remember { mutableStateOf(0) }
+    var showingStanza by remember { mutableStateOf(-1) }
 
     LaunchedEffect(props.poemId) {
       loading = true
@@ -51,14 +51,13 @@ class PoemPresenter(
         }
       }
 
-      IndexDetailUi(
-        index = BackstackUi(
-          SimpleSelectListUi(poem.firstLines, showingStanza) {
-            showingStanza = it
-          }
-        ),
-        detail = stanzaUis.toBackstack { i, _ -> "$i" }
+      val list = BackstackUi<UiModel>(
+        SimpleSelectListUi(poem.firstLines, showingStanza) {
+          showingStanza = it
+        }
       )
+      val detail = stanzaUis.toBackstackOrNull<UiModel> { i, _ -> "$i" }
+      ListDetailUi(list, detail)
     }
   }
 }
