@@ -2,6 +2,7 @@ package rjrjr.com.ttt.framework
 
 import androidx.compose.runtime.Composable
 import com.zachklipp.compose.backstack.Backstack
+import com.zachklipp.compose.backstack.toBackstackModel
 
 data class BackstackUi<U : UiModel>(
   val previous: List<UiAndKey<U>> = emptyList(),
@@ -20,11 +21,11 @@ data class BackstackUi<U : UiModel>(
   }
 
   @Composable override fun Content() {
-    val map = frames.associate { it.key to it.ui }
-
     Backstack(
-      map.keys.toList()
-    ) { key -> ShowUi(map.getValue(key)) }
+      frames.toBackstackModel(
+        getKey = { it.key }
+      ) { ShowUi(it.ui) }
+    )
   }
 
   operator fun plus(other: BackstackUi<U>?): BackstackUi<U> {
