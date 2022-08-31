@@ -3,6 +3,7 @@ package rjrjr.com.ttt.framework
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 
@@ -10,7 +11,7 @@ import androidx.compose.ui.Modifier
  * [CompositionLocal][androidx.compose.runtime.CompositionLocal] that can provide
  * Compose UI content for [UiModel] instances.
  */
-class UiContentRegistry(private val bindings: List<UiBinding<*>> = emptyList()) {
+internal class UiContentRegistry(private val bindings: List<UiBinding<*>>) {
   @Composable fun ContentFor(
     uiModel: UiModel,
     modifier: Modifier = Modifier
@@ -37,8 +38,25 @@ class UiContentRegistry(private val bindings: List<UiBinding<*>> = emptyList()) 
   override fun hashCode(): Int = bindings.hashCode()
 }
 
-val LocalUiContentRegistry = compositionLocalOf { UiContentRegistry() }
+internal val LocalUiContentRegistry = compositionLocalOf { UiContentRegistry(emptyList()) }
 
+@Composable fun ProvideLocalUiBindings(
+  bindings: List<UiBinding<*>>,
+  content: @Composable () -> Unit
+) {
+  // TODO: look for the existing ones and add these to them
+  //  static?
+  CompositionLocalProvider(
+    LocalUiContentRegistry provides UiContentRegistry(bindings),
+    content = content
+  )
+}
+
+/**
+ * Displays [uiModel] via the [UiBinding]s declared by [ProvideLocalUiBindings],
+ * or via [ComposeUiModel.Content] if [uiModel] implements that interface
+ * and no binding is found.
+ */
 @Composable fun ShowUi(
   uiModel: UiModel,
   modifier: Modifier = Modifier

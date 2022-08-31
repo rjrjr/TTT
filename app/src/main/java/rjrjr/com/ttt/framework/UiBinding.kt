@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import kotlin.reflect.KClass
 
 /**
- * Entry in a [UiContentRegistry], defining what `@Composable` [content]
- * function to use for a particular [type].
+ * Entry registered with [ProvideLocalUiBindings], defining
+ * what `@Composable` [content] function to use for a particular [type].
  */
 data class UiBinding<S : UiModel>(
   val type: KClass<S>,

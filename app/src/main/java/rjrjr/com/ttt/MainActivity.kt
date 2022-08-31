@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -20,15 +19,15 @@ import app.cash.molecule.RecompositionClock
 import app.cash.molecule.launchMolecule
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.plus
-import rjrjr.com.ttt.counter.CounterUi
 import rjrjr.com.ttt.counter.Counter
-import rjrjr.com.ttt.framework.LocalUiContentRegistry
-import rjrjr.com.ttt.framework.UiContentRegistry
+import rjrjr.com.ttt.counter.CounterUi
+import rjrjr.com.ttt.framework.ProvideLocalUiBindings
+import rjrjr.com.ttt.framework.ShowUi
 import rjrjr.com.ttt.framework.UiBinding
 import rjrjr.com.ttt.framework.UiModel
 import rjrjr.com.ttt.poetry.STANZA_BINDINGS
-import rjrjr.com.ttt.tictactoe.TicTacToeUi
 import rjrjr.com.ttt.tictactoe.TicTacToe
+import rjrjr.com.ttt.tictactoe.TicTacToeUi
 import rjrjr.com.ttt.ui.theme.TTTTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,20 +54,18 @@ class MainActivity : ComponentActivity() {
 fun AppUi(roots: StateFlow<UiModel>) {
   val root by roots.collectAsState()
 
-  CompositionLocalProvider(
-    LocalUiContentRegistry provides UiContentRegistry(
-      listOf(
-        UiBinding(CounterUi::class) { Counter(it) },
-        UiBinding(TicTacToeUi::class) { TicTacToe(it) },
-      ) + STANZA_BINDINGS
-    )
+  ProvideLocalUiBindings(
+    listOf(
+      UiBinding(CounterUi::class) { Counter(it) },
+      UiBinding(TicTacToeUi::class) { TicTacToe(it) },
+    ) + STANZA_BINDINGS
   ) {
     TTTTheme {
       Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
       ) {
-        LocalUiContentRegistry.current.ContentFor(root)
+        ShowUi(root)
       }
     }
   }
