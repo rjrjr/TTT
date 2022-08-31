@@ -8,10 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import rjrjr.com.ttt.framework.UiContentRegistry.Binding
+import rjrjr.com.ttt.framework.UiBinding
 
 val STANZA_BINDINGS = listOf(
-  Binding(StanzaUi::class) { stanza ->
+  UiBinding(StanzaUi::class) { stanza ->
     Stanza(stanza)
   }
 )

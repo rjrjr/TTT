@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import rjrjr.com.ttt.framework.BackstackUi
-import rjrjr.com.ttt.framework.ListDetailUi
+import rjrjr.com.ttt.framework.IndexDetailUi
 import rjrjr.com.ttt.framework.LoadingUi
 import rjrjr.com.ttt.framework.Presenter
 import rjrjr.com.ttt.framework.SimpleSelectListUi
@@ -57,7 +57,7 @@ class PoemPresenter(
         }
       )
       val detail = stanzaUis.toBackstackOrNull<UiModel> { i, _ -> "$i" }
-      ListDetailUi(list, detail)
+      IndexDetailUi(list, detail)
     }
   }
 }

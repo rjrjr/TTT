@@ -6,30 +6,30 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-data class ListDetailUi<U : UiModel>(
-  val list: BackstackUi<U>,
+data class IndexDetailUi<U : UiModel>(
+  val index: BackstackUi<U>,
   val detail: BackstackUi<U>? = null
 ) : ComposeUiModel {
   @Composable override fun Content() {
     BoxWithConstraints {
       if (maxWidth > maxHeight) {
         Row {
-          ShowUi(list, Modifier.weight(3f, true))
+          ShowUi(index, Modifier.weight(3f, true))
           Box(Modifier.weight(7f, true)) {
             detail?.let { ShowUi(it) }
           }
         }
       } else {
-        ShowUi(list + detail)
+        ShowUi(index + detail)
       }
     }
   }
 
-  operator fun plus(other: ListDetailUi<U>): ListDetailUi<U> {
-    val newIndex = list + other.list
+  operator fun plus(other: IndexDetailUi<U>): IndexDetailUi<U> {
+    val newIndex = index + other.index
     val newDetail = detail?.let { it + other.detail } ?: other.detail
 
-    return ListDetailUi(newIndex, newDetail)
+    return IndexDetailUi(newIndex, newDetail)
   }
 }
 

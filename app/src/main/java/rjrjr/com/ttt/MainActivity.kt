@@ -24,7 +24,7 @@ import rjrjr.com.ttt.counter.CounterUi
 import rjrjr.com.ttt.counter.Counter
 import rjrjr.com.ttt.framework.LocalUiContentRegistry
 import rjrjr.com.ttt.framework.UiContentRegistry
-import rjrjr.com.ttt.framework.UiContentRegistry.Binding
+import rjrjr.com.ttt.framework.UiBinding
 import rjrjr.com.ttt.framework.UiModel
 import rjrjr.com.ttt.poetry.STANZA_BINDINGS
 import rjrjr.com.ttt.tictactoe.TicTacToeUi
@@ -58,8 +58,8 @@ fun AppUi(roots: StateFlow<UiModel>) {
   CompositionLocalProvider(
     LocalUiContentRegistry provides UiContentRegistry(
       listOf(
-        Binding(CounterUi::class) { Counter(it) },
-        Binding(TicTacToeUi::class) { TicTacToe(it) },
+        UiBinding(CounterUi::class) { Counter(it) },
+        UiBinding(TicTacToeUi::class) { TicTacToe(it) },
       ) + STANZA_BINDINGS
     )
   ) {

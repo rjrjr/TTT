@@ -5,23 +5,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
-import kotlin.reflect.KClass
 
 /**
  * [CompositionLocal][androidx.compose.runtime.CompositionLocal] that can provide
  * Compose UI content for [UiModel] instances.
  */
-class UiContentRegistry(private val bindings: List<Binding<*>> = emptyList()) {
-  data class Binding<S : UiModel>(
-    val type: KClass<S>,
-    val content: @Composable (screenModel: S) -> Unit
-  ) {
-    @Composable fun Content(screen: UiModel) {
-      @Suppress("UNCHECKED_CAST")
-      content(screen as S)
-    }
-  }
-
+class UiContentRegistry(private val bindings: List<UiBinding<*>> = emptyList()) {
   @Composable fun ContentFor(
     uiModel: UiModel,
     modifier: Modifier = Modifier
