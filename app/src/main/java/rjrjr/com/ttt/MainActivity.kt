@@ -16,19 +16,19 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.cash.molecule.AndroidUiDispatcher.Companion.Main
-import app.cash.molecule.RecompositionClock
+import app.cash.molecule.RecompositionMode
 import app.cash.molecule.launchMolecule
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.plus
-import rjrjr.com.ttt.counter.CounterUi
 import rjrjr.com.ttt.counter.Counter
+import rjrjr.com.ttt.counter.CounterUi
 import rjrjr.com.ttt.framework.LocalUiContentRegistry
 import rjrjr.com.ttt.framework.UiContentRegistry
 import rjrjr.com.ttt.framework.UiContentRegistry.Binding
 import rjrjr.com.ttt.framework.UiModel
 import rjrjr.com.ttt.poetry.STANZA_BINDINGS
-import rjrjr.com.ttt.tictactoe.TicTacToeUi
 import rjrjr.com.ttt.tictactoe.TicTacToe
+import rjrjr.com.ttt.tictactoe.TicTacToeUi
 import rjrjr.com.ttt.ui.theme.TTTTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
   class Continuity : ViewModel() {
     private val scope = viewModelScope + Main
-    val models = scope.launchMolecule(clock = RecompositionClock.ContextClock) {
+    val models = scope.launchMolecule(mode = RecompositionMode.ContextClock) {
       val rootPresenter = remember { FakeDaggerWithNoSingletons().rootPresenter() }
       rootPresenter.present(Unit)
     }
@@ -68,7 +68,7 @@ fun AppUi(roots: StateFlow<UiModel>) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
       ) {
-        LocalUiContentRegistry.current.ContentFor(root)
+        LocalUiContentRegistry.current.Box(root)
       }
     }
   }

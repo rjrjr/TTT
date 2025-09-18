@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 
 /**
  * Marker interface for models that can be mapped to Compose UI content
- * by [UiContentRegistry.ContentFor].
+ * by [UiContentRegistry.Box].
  */
 interface UiModel
 

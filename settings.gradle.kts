@@ -1,9 +1,14 @@
 pluginManagement {
   repositories {
-    gradlePluginPortal()
-    google()
+    google {
+      content {
+        includeGroupByRegex("com\\.android.*")
+        includeGroupByRegex("com\\.google.*")
+        includeGroupByRegex("androidx.*")
+      }
+    }
     mavenCentral()
-    mavenLocal()
+    gradlePluginPortal()
   }
 }
 dependencyResolutionManagement {
@@ -11,8 +16,9 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    mavenLocal()
   }
 }
+
 rootProject.name = "TTT"
-include ':app'
+include(":app")
+ 

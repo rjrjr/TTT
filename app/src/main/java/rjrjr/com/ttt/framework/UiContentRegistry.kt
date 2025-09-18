@@ -22,7 +22,7 @@ class UiContentRegistry(private val bindings: List<Binding<*>> = emptyList()) {
     }
   }
 
-  @Composable fun ContentFor(
+  @Composable fun Box(
     uiModel: UiModel,
     modifier: Modifier = Modifier
   ) {
@@ -54,5 +54,5 @@ val LocalUiContentRegistry = compositionLocalOf { UiContentRegistry() }
   uiModel: UiModel,
   modifier: Modifier = Modifier
 ) {
-  LocalUiContentRegistry.current.ContentFor(uiModel, modifier)
+  LocalUiContentRegistry.current.Box(uiModel, modifier)
 }

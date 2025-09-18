@@ -2,22 +2,17 @@ package rjrjr.com.ttt.framework
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize.Max
-import androidx.compose.foundation.layout.IntrinsicSize.Min
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.style.TextOverflow.Companion
 import androidx.compose.ui.unit.dp
 
 data class SimpleSelectListUi(
@@ -42,7 +37,7 @@ data class SimpleSelectListUi(
     list.forEachIndexed { index, string ->
       Row(
         Modifier
-          .background(if (index == selection) MaterialTheme.colors.secondary else Color.Transparent)
+          .background(if (index == selection) Color.Blue else Color.Transparent)
           .padding(8.dp)
           .selectable(
           selected = index == selection,

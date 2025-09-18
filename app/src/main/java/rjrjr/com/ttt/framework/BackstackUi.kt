@@ -1,7 +1,8 @@
 package rjrjr.com.ttt.framework
 
 import androidx.compose.runtime.Composable
-import com.zachklipp.compose.backstack.Backstack
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.ui.NavDisplay
 
 data class BackstackUi<U : UiModel>(
   val previous: List<UiAndKey<U>> = emptyList(),
@@ -46,7 +47,19 @@ data class UiAndKey<U : UiModel>(
 
 @Composable
 private fun BackstackView(model: BackstackUi<*>) {
-  Backstack(model.frames) { ShowUi(it.ui) }
+  NavDisplay(
+    model.frames,
+    onBack = {
+      // Our habit is to leave this kind of thing a no-op to discourage
+      // screen authors from relying on magical default pop behavior.
+      // Maybe rethink that?
+    },
+    entryProvider = { uiAndKey ->
+      NavEntry(uiAndKey) {
+        ShowUi(uiAndKey.ui)
+      }
+    }
+  )
 }
 
 fun <U : UiModel> List<U>.toBackstackOrNull(
