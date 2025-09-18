@@ -21,27 +21,25 @@ data class SimpleSelectListUi(
   val onSelect: (Int) -> Unit
 ) : ComposeUiModel {
   @Composable override fun Content() {
-    SimpleSelectList(list, selection, onSelect)
+    SimpleSelectList(this)
   }
 }
 
 @Composable private fun SimpleSelectList(
-  list: List<String>,
-  selection: Int,
-  onSelect: (Int) -> Unit
+  model: SimpleSelectListUi
 ) {
   Column(
     modifier = Modifier.selectableGroup()
       .verticalScroll(rememberScrollState())
   ) {
-    list.forEachIndexed { index, string ->
+    model.list.forEachIndexed { index, string ->
       Row(
         Modifier
-          .background(if (index == selection) Color.Blue else Color.Transparent)
+          .background(if (index == model.selection) Color.Blue else Color.Transparent)
           .padding(8.dp)
           .selectable(
-          selected = index == selection,
-          onClick = { onSelect(index) }
+          selected = index == model.selection,
+          onClick = { model.onSelect(index) }
         ),
       ) {
         Text(
